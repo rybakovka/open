@@ -32,7 +32,7 @@ public class ApiTest {
 
         Person sendPerson = new Person("Nico", "manager");
 
-        Person receivedPerson = given().log().body()
+        Person receivedPerson = given()
                 .contentType("application/json").body(sendPerson)
                 .when().post("https://reqres.in/api/users")
                 .as(Person.class);
