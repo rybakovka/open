@@ -38,8 +38,6 @@ public class SiteTest {
                 .getEurRow();
         List<Money> moniesUsd = bankPage
                 .getUsdRow();
-        System.out.println(moniesEur);
-        System.out.println(moniesUsd);
         Assert.assertEquals(1, moniesEur.get(1).compareTo(moniesEur.get(0)),
                 "Курс продажи больше курса покупки для EUR");
         Assert.assertEquals(1, moniesUsd.get(1).compareTo(moniesUsd.get(0)),
@@ -55,8 +53,6 @@ public class SiteTest {
                 .getEurRow();
         List<Money> moniesUsd = bankPage
                 .getUsdRow();
-        System.out.println(moniesEur);
-        System.out.println(moniesUsd);
         Assert.assertEquals(1, moniesEur.get(1).compareTo(moniesEur.get(0)),
                 "Курс продажи больше курса покупки для EUR");
         Assert.assertEquals(1, moniesUsd.get(1).compareTo(moniesUsd.get(0)),

@@ -20,12 +20,10 @@ import static com.codeborne.selenide.Selenide.$$;
  */
 public class BankPage {
 
-    @FindBy(how = How.CSS, using = "div#tab-defaultRate")
-    private SelenideElement defaultRateButton;
-
-    @FindBy(how = How.CSS, using = "div#tab-preferentialRate")
-    private SelenideElement preferentialRateButton;
-
+    /**
+     * В разделе курс обмена выбрать интернет-банк.
+     * @return BankPage
+     */
     public BankPage selectInternetBank() {
         $("div.main-page-exchange__dropdown-button").click();
         $$(By.xpath("//div[@class='main-page-exchange__dropdown-overlay']/ul[@role='menu']/li"))
@@ -35,29 +33,49 @@ public class BankPage {
         return this;
     }
 
+    /**
+     * В разделе курс обмена переключиться на Льготный курс
+     * @return BankPage
+     */
     public BankPage switchToPreferentialRate() {
-        preferentialRateButton.waitUntil(Condition.visible, 10000).scrollTo();
-        preferentialRateButton.click();
+        $("div#tab-preferentialRate")
+                .waitUntil(Condition.visible, 10000)
+                .scrollTo()
+                .click();
         return this;
     }
 
+    /**
+     * В разделе курс обмена переключиться на Стандартный курс
+     * @return BankPage
+     */
     public BankPage switchToDefaultRate() {
-        defaultRateButton.waitUntil(Condition.visible, 10000).scrollTo();
-        defaultRateButton.click();
+        $("div#tab-defaultRate")
+                .waitUntil(Condition.visible, 10000)
+                .scrollTo()
+                .click();
         return this;
     }
 
+    /**
+     * Получить курс покупки и курс продажи для USD
+     * @return [Курс покупки, Курс продажи]
+     */
     public List<Money> getUsdRow() {
         ElementsCollection eurCells = $(By.xpath("//div[@aria-hidden='false']//tbody"))
                 .find(byText("USD"))
                 .closest("tr")
                 .findAll("td");
         List<Money> monies = new ArrayList<>();
-        monies.add(new Money(eurCells.get(1).getText()));
-        monies.add(new Money(eurCells.get(3).getText()));
+        monies.add(new Money(eurCells.get(1).waitUntil(Condition.visible, 5000).getText()));
+        monies.add(new Money(eurCells.get(3).waitUntil(Condition.visible, 5000).getText()));
         return monies;
     }
 
+    /**
+     * Получить курс покупки и курс продажи для EUR
+     * @return [Курс покупки, Курс продажи]
+     */
     public List<Money> getEurRow() {
         ElementsCollection eurCells = $(By.xpath("//div[@aria-hidden='false']//tbody"))
                 .find(byText("EUR"))

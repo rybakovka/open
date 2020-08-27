@@ -21,9 +21,9 @@ public class GooglePage {
                 .filterBy(Condition.exactText(site));
     }
 
-    public void clickResult(String bankPageUrl) {
+    public void clickResult(String url) {
         $$(By.xpath("//cite"))
-                .filterBy(Condition.exactText(bankPageUrl))
+                .filterBy(Condition.exactText(url))
                 .first()
                 .click();
     }
