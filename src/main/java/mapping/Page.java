@@ -2,17 +2,28 @@ package mapping;
 
 import java.util.List;
 
+/**
+ * Модель данных
+ * @author Константин Рыбаков
+ */
 public class Page {
 
-    String page;
+    private String page;
+    private List<User> data;
 
-    public List<User> data;
+    public String getPage() {
+        return page;
+    }
 
-    public class User {
-        public String id;
-        public String email;
-        public String first_name;
-        public String last_name;
-        public String avatar;
+    public void setPage(String page) {
+        this.page = page;
+    }
+
+    public List<User> getData() {
+        return data;
+    }
+
+    public void setData(List<User> data) {
+        this.data = data;
     }
 }

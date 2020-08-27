@@ -1,12 +1,16 @@
 package helpers;
 
 /**
- * Класс для работы с денежными величинами.
+ * Класс для сравнения денежных строк.
+ * @author Константин Рыбаков
  */
 public class Money implements Comparable<Money> {
     private Integer whole;
     private Integer fractional;
 
+    /**
+     * @param s Число с десятичным разделителем Запятая
+     */
     public Money(String s) {
         String[] digits = s.split(",");
         whole = Integer.parseInt(digits[0]);

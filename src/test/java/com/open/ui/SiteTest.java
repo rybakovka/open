@@ -11,11 +11,12 @@ import static com.codeborne.selenide.Selenide.*;
 
 /**
  * Тесты UI
+ * @author Константин Рыбаков
  */
 public class SiteTest {
 
-    GooglePage googlePage;
-    BankPage bankPage;
+    private GooglePage googlePage;
+    private BankPage bankPage;
 
     @Test(description = "Проверка выдачи поиска Google")
     public void checkSearchResult() {
@@ -28,34 +29,46 @@ public class SiteTest {
         googlePage.clickResult("www.open.ru");
     }
 
-    @Test(description = "Проверка соответствия Льготного курса правилу.",
+    @Test(description = "Проверка соответствия Льготного курса EUR правилу.",
             dependsOnMethods = "checkSearchResult")
-    public void checkPreferentialRate() {
+    public void checkPreferentialEurRate() {
         bankPage = page(BankPage.class);
         List<Money> moniesEur = bankPage
                 .selectInternetBank()
                 .switchToPreferentialRate()
                 .getEurRow();
-        List<Money> moniesUsd = bankPage
-                .getUsdRow();
         Assert.assertEquals(1, moniesEur.get(1).compareTo(moniesEur.get(0)),
-                "Курс продажи больше курса покупки для EUR");
-        Assert.assertEquals(1, moniesUsd.get(1).compareTo(moniesUsd.get(0)),
-                "Курс продажи больше курса покупки для USD");
+                "Курс продажи Льготного курса больше для EUR");
+
     }
 
-    @Test(description = "Проверка соответствия Стандартного курса правилу.",
+    @Test(description = "Проверка соответствия Льготного курса USD правилу.",
+            dependsOnMethods = "checkPreferentialEurRate")
+    public void checkPreferentialUsdRate() {
+        List<Money> moniesUsd = bankPage.getUsdRow();
+        Assert.assertEquals(1, moniesUsd.get(1).compareTo(moniesUsd.get(0)),
+                "Курс продажи Льготного курса больше для USD");
+    }
+
+
+    @Test(description = "Проверка соответствия Стандартного курса EUR правилу.",
             dependsOnMethods = "checkSearchResult")
-    public void checkDefaultRate() {
+    public void checkDefaultEurRate() {
         bankPage = page(BankPage.class);
         List<Money> moniesEur = bankPage
                 .switchToDefaultRate()
                 .getEurRow();
-        List<Money> moniesUsd = bankPage
-                .getUsdRow();
+
         Assert.assertEquals(1, moniesEur.get(1).compareTo(moniesEur.get(0)),
-                "Курс продажи больше курса покупки для EUR");
+                "Курс продажи Стандартного курса больше для EUR");
+
+    }
+
+    @Test(description = "Проверка соответствия Стандартного курса USD правилу.",
+            dependsOnMethods = "checkDefaultEurRate")
+    public void checkDefaultUsdRate() {
+        List<Money> moniesUsd = bankPage.getUsdRow();
         Assert.assertEquals(1, moniesUsd.get(1).compareTo(moniesUsd.get(0)),
-                "Курс продажи больше курса покупки для USD");
+                "Курс продажи Стандартного курса больше для USD");
     }
 }
