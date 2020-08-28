@@ -37,7 +37,7 @@ public class SiteTest {
                 .selectInternetBank()
                 .switchToPreferentialRate()
                 .getEurRow();
-        Assert.assertEquals(1, moneyEur.get(1).compareTo(moneyEur.get(0)),
+        Assert.assertEquals( moneyEur.get(1).compareTo(moneyEur.get(0)) > 0,true,
                 "Курс продажи Льготного курса больше для EUR");
 
     }
@@ -46,7 +46,7 @@ public class SiteTest {
             dependsOnMethods = "testCheckPreferentialEurRate")
     public void testCheckPreferentialUsdRate() {
         List<Money> moneyUsd = bankPage.getUsdRow();
-        Assert.assertEquals(1, moneyUsd.get(1).compareTo(moneyUsd.get(0)),
+        Assert.assertEquals(moneyUsd.get(1).compareTo(moneyUsd.get(0)) > 0, true,
                 "Курс продажи Льготного курса больше для USD");
     }
 
@@ -58,7 +58,7 @@ public class SiteTest {
         List<Money> moneyEur = bankPage
                 .switchToDefaultRate()
                 .getEurRow();
-        Assert.assertEquals(1, moneyEur.get(1).compareTo(moneyEur.get(0)),
+        Assert.assertEquals(moneyEur.get(1).compareTo(moneyEur.get(0)) > 0, true,
                 "Курс продажи Стандартного курса больше для EUR");
 
     }
@@ -67,7 +67,7 @@ public class SiteTest {
             dependsOnMethods = "testCheckDefaultEurRate")
     public void testCheckDefaultUsdRate() {
         List<Money> moneyUsd = bankPage.getUsdRow();
-        Assert.assertEquals(1, moneyUsd.get(1).compareTo(moneyUsd.get(0)),
+        Assert.assertEquals(moneyUsd.get(1).compareTo(moneyUsd.get(0)) > 0, true,
                 "Курс продажи Стандартного курса больше для USD");
     }
 }

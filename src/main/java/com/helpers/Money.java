@@ -5,8 +5,8 @@ package com.helpers;
  * @author Константин Рыбаков
  */
 public class Money implements Comparable<Money> {
-    private Integer whole;
-    private Integer fractional;
+    private int whole;
+    private int fractional;
 
     /**
      * @param s Число с десятичным разделителем Запятая
@@ -18,17 +18,10 @@ public class Money implements Comparable<Money> {
     }
 
     @Override
-    public String toString() {
-        return whole + "," + fractional;
-    }
-
-    @Override
     public int compareTo(Money money) {
-        if (0 == whole.compareTo(money.whole)) {
-            return fractional.compareTo(money.fractional);
-        } else {
-            return whole.compareTo(money.whole);
-        }
+        int diffWhole = this.whole - money.whole;
+        int diffFractional = this.fractional - money.fractional;
+        return 0 == diffWhole ? diffFractional : diffWhole;
     }
 }
 
