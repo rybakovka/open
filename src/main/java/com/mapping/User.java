@@ -1,4 +1,4 @@
-package mapping;
+package com.mapping;
 
 /**
  * Модель данных
@@ -28,20 +28,20 @@ public class User {
         this.email = email;
     }
 
-    public String getFirst_name() {
+    public String getFirstName() {
         return first_name;
     }
 
-    public void setFirst_name(String first_name) {
-        this.first_name = first_name;
+    public void setFirstName(String firstName) {
+        this.first_name = firstName;
     }
 
-    public String getLast_name() {
+    public String getLastName() {
         return last_name;
     }
 
-    public void setLast_name(String last_name) {
-        this.last_name = last_name;
+    public void setLastName(String lastName) {
+        this.last_name = lastName;
     }
 
     public String getAvatar() {
@@ -50,14 +50,5 @@ public class User {
 
     public void setAvatar(String avatar) {
         this.avatar = avatar;
-    }
-
-    public boolean cotainsNullField() {
-        return ((null != id) &&
-                (null != email) &&
-                (null != first_name) &&
-                (null != last_name) &&
-                (null != avatar));
-
     }
 }

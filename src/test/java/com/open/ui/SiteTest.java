@@ -1,7 +1,7 @@
 package com.open.ui;
 
 import com.codeborne.selenide.Condition;
-import helpers.Money;
+import com.helpers.Money;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 

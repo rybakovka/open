@@ -1,4 +1,4 @@
-package mapping;
+package com.mapping;
 
 import java.util.Objects;
 

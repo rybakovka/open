@@ -2,11 +2,8 @@ package com.open.ui;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
-import com.codeborne.selenide.SelenideElement;
-import helpers.Money;
+import com.helpers.Money;
 import org.openqa.selenium.By;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.How;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -66,10 +63,10 @@ public class BankPage {
                 .find(byText("USD"))
                 .closest("tr")
                 .findAll("td");
-        List<Money> monies = new ArrayList<>();
-        monies.add(new Money(eurCells.get(1).waitUntil(Condition.visible, 5000).getText()));
-        monies.add(new Money(eurCells.get(3).waitUntil(Condition.visible, 5000).getText()));
-        return monies;
+        List<Money> money = new ArrayList<>();
+        money.add(new Money(eurCells.get(1).waitUntil(Condition.visible, 5000).getText()));
+        money.add(new Money(eurCells.get(3).waitUntil(Condition.visible, 5000).getText()));
+        return money;
     }
 
     /**
@@ -81,9 +78,9 @@ public class BankPage {
                 .find(byText("EUR"))
                 .closest("tr")
                 .findAll("td");
-        List<Money> monies = new ArrayList<>();
-        monies.add(new Money(eurCells.get(1).waitUntil(Condition.visible, 5000).getText()));
-        monies.add(new Money(eurCells.get(3).waitUntil(Condition.visible, 5000).getText()));
-        return monies;
+        List<Money> money = new ArrayList<>();
+        money.add(new Money(eurCells.get(1).waitUntil(Condition.visible, 5000).getText()));
+        money.add(new Money(eurCells.get(3).waitUntil(Condition.visible, 5000).getText()));
+        return money;
     }
 }

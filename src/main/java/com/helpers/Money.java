@@ -1,4 +1,4 @@
-package helpers;
+package com.helpers;
 
 /**
  * Класс для сравнения денежных строк.
