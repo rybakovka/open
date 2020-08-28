@@ -19,7 +19,7 @@ public class SiteTest {
     private BankPage bankPage;
 
     @Test(description = "Проверка выдачи поиска Google")
-    public void checkSearchResult() {
+    public void testCheckSearchResult() {
         googlePage = open("https://www.google.com/", GooglePage.class);
         int linkCount = googlePage.search("открытие")
                 .filteredResults("www.open.ru")
@@ -30,8 +30,8 @@ public class SiteTest {
     }
 
     @Test(description = "Проверка соответствия Льготного курса EUR правилу.",
-            dependsOnMethods = "checkSearchResult")
-    public void checkPreferentialEurRate() {
+            dependsOnMethods = "testCheckSearchResult")
+    public void testCheckPreferentialEurRate() {
         bankPage = page(BankPage.class);
         List<Money> moneyEur = bankPage
                 .selectInternetBank()
@@ -43,8 +43,8 @@ public class SiteTest {
     }
 
     @Test(description = "Проверка соответствия Льготного курса USD правилу.",
-            dependsOnMethods = "checkPreferentialEurRate")
-    public void checkPreferentialUsdRate() {
+            dependsOnMethods = "testCheckPreferentialEurRate")
+    public void testCheckPreferentialUsdRate() {
         List<Money> moneyUsd = bankPage.getUsdRow();
         Assert.assertEquals(1, moneyUsd.get(1).compareTo(moneyUsd.get(0)),
                 "Курс продажи Льготного курса больше для USD");
@@ -52,8 +52,8 @@ public class SiteTest {
 
 
     @Test(description = "Проверка соответствия Стандартного курса EUR правилу.",
-            dependsOnMethods = "checkSearchResult")
-    public void checkDefaultEurRate() {
+            dependsOnMethods = "testCheckSearchResult")
+    public void testCheckDefaultEurRate() {
         bankPage = page(BankPage.class);
         List<Money> moneyEur = bankPage
                 .switchToDefaultRate()
@@ -64,8 +64,8 @@ public class SiteTest {
     }
 
     @Test(description = "Проверка соответствия Стандартного курса USD правилу.",
-            dependsOnMethods = "checkDefaultEurRate")
-    public void checkDefaultUsdRate() {
+            dependsOnMethods = "testCheckDefaultEurRate")
+    public void testCheckDefaultUsdRate() {
         List<Money> moneyUsd = bankPage.getUsdRow();
         Assert.assertEquals(1, moneyUsd.get(1).compareTo(moneyUsd.get(0)),
                 "Курс продажи Стандартного курса больше для USD");

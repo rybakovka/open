@@ -14,8 +14,8 @@ import org.testng.annotations.Test;
  */
 public class ApiTest {
 
-    @Test(description = "Проверить, что все поля пришли.")
-    public void getRq() {
+    @Test(description = "Проверка, что все поля пришли.")
+    public void testGetRq() {
         Page page = given()
                 .when()
                 .get("https://reqres.in/api/users?page=2")
@@ -30,8 +30,8 @@ public class ApiTest {
         }
     }
 
-    @Test(description = "Создать пользователя, отправить его и проверить ответ.")
-    public void postRq() {
+    @Test(description = "Создание пользователя его отправка и проверка ответа.")
+    public void testPostRq() {
         Person sendPerson = new Person("Nico", "manager");
         Person receivedPerson = given()
                 .contentType("application/json").body(sendPerson)
